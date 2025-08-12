@@ -1,0 +1,312 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link href="./style.css" rel="stylesheet" type="text/css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/dc4a0f0626.js" crossorigin="anonymous"></script>
+    <script src="nui://game/ui/jquery.js" type="text/javascript"></script>
+    <script src="./script.js" type="text/javascript"></script>
+</head>
+
+<body>
+    <div id="announcement"></div>
+    <div id="container">
+        <div id="inner">
+            <div id="playerlist">
+                <div class="ptitle">
+                    <span class="pname">ผู้เล่น</span><input type="text" id="search"
+                        placeholder="&#xf002; ค้นหา ชื่อ/ไอดี" value="" />
+                </div>
+                <div id="pinner">
+                </div>
+            </div>
+            <main>
+                <header><span class="menutitle" style="padding-left:15px">Admin Panel</span><a href="#back" id="back"
+                        class="back"><i class="fas fa-chevron-left"></i> BACK</a><a href="#server" id="button"
+                        class="server" style="display:none">Admin Actions</a></header>
+                <div id="server">
+                    <div id="info">
+                        <div class="titlebox">ตำแหน่งของคุณ</div>
+                        <div class="inner">
+                            <div class="coords"></div>
+                            <a href="#coords" class="clipboard" id="clipboard">(คัดลอก)</a>
+                        </div>
+                    </div>
+                    <div class="sectiontitle">Admin Actions</div>
+                    <div id="grid-container" class="grid-container">
+                                    <div id="popup">
+                                        <input type="text" id="announcementInput" placeholder="ใส่ข้อความประกาศที่ต้องการ">
+                                        <button id="announceButton">ประกาศ</button>
+                                        <button id="cancelButton">ยกเลิก</button>
+                                    </div>
+                                    <div><button class="btn" data-action="announce"><i class="fas fa-bullhorn"></i><span>ประกาศ</span></button></div>
+                                    <div id="announcement"></div>
+                                    
+                        <div><button class="btn" data-action="noclip"><i
+                                    class="fas fa-ghost"></i><span>ลอย</span></button></div>
+                        <div><button class="btn" id="tpwp-button"><i
+                                    class="fas fa-route"></i>วาปไปยังจุด</button></div>
+                        <div><button class="btn" data-action="bringall"><i class="fas fa-people-carry"></i>ดึงทั้งหมด</button></div>
+                        <div><button class="btn" data-action="name_on"><i
+                                    class="fas fa-user-circle"></i>ชื่อบนหัว</button>
+                        </div>
+                        <div><button class="btn" data-action="Updateblip"><i class="fas fa-user-circle"></i>Blip
+                                ผู้เล่น</button>
+                        </div>
+                        <div><button class="btn" data-action="healall"><i class="fas fa-heart"></i>ฮีลทุกคน</button>
+                        </div>
+                        <div><button class="btn" data-action="reviveall"><i
+                                    class="fas fa-heartbeat"></i>ชุบชีวิตทุกคน</button></div>
+                        <div>
+                            <button class="btn main" data-action="skin">
+                                <i class="fas fa-user-cog"></i>
+                                <span>เมนูสกิน</span>
+                            </button>
+                        </div>
+                        <div id="vehicleslist">
+                                <div>
+                                    <button class="btn" id="vehicleMenuButton" data-action="openVehicleMenu"><i class="fas fa-car"></i><span>ยานพาหนะ</span></button>
+                                </div>
+                        </div>
+                        <div id="weatherlist">
+                                <div>
+                                    <button class="btn" id="weatherMenuButton" data-action="openWeatherMenu"><i class="fas fa-sun"></i><span>อากาศและเวลา</span></button>
+                                </div>
+                        </div>
+
+                    </div>
+                    <div id="vehicleSubMenu" class="submenu" style="display: none;">
+                        <div class="submenu-title">จัดการยานพาหนะ</div>
+                        <div class="submenu-buttons">
+                            <div><button class="btn" data-action="spawnVehicle"><i class="fas fa-car"></i><span>เสกรถ</span></button></div>
+                            <div><button class="btn" data-action="setvehicle"><i class="fas fa-car-battery"></i><span>แต่งรถ</span></button></div>
+                            <div><button class="btn" data-action="fix"><i class="fas fa-wrench"></i><span>ซ่อมรถ</span></button></div>
+                            <div><button class="btn" data-action="washcar"><i class="fas fa-hand-sparkles"></i><span>ล้างรถ</span></button></div>
+                            <div><button class="btn" data-action="washcargod"><i class="fas fa-soap"></i><span>รถสกปรก</span></button></div>
+                            <div><button class="btn" data-action="cargod"><i class="fas fa-car-crash"></i><span>รถอมตะ</span></button></div>
+                            <div><button class="btn" data-action="flipcar"><i class="fas fa-redo"></i><span>พลิกรถ</span></button></div>
+                            <div><button class="btn" data-action="oilgod"><i class="fas fa-gas-pump"></i><span>น้ำมันไม่ลด</span></button></div>
+                            <div><button class="btn" data-action="speedcar"><i class="fas fa-car-battery"></i><span>เพิ่มความเร็ว</span></button></div>
+                            <div><button class="btn" id="backButton" data-action="backFromVehicle"><i class="fas fa-arrow-left"></i><span>กลับ</span></button></div>
+                        </div>
+                    </div>
+
+                    <div id="speedcarPopup" class="popupspeed" style="display: none;">
+                        <p id="speedcarPopupText"></p>
+                        <input type="text" id="speedcarInput" placeholder="กรุณาใส่ความเร็ว">
+                        <button id="confirmSpeedcarButton">ตกลง</button>
+                        <button id="cancelSpeedcarButton">ยกเลิก</button>
+                    </div>
+
+                    <div id="weatherSubMenu" class="submenu" style="display: none;">
+                        <div class="submenu-title">เมนูจัดการอากาศและเวลา</div>
+                        <br>
+                        <div class="submenu-grid">
+                            <div class="grid-item"><button class="btn" data-action="blackout"><i class="fas fa-moon"></i><span>ไฟดับ</span></button></div>
+                            <div class="grid-item"><button class="btn" data-action="freezeWeather"><i class="fas fa-sun"></i><span>หยุดอากาศ</span></button></div>
+                            <div class="grid-item"><button class="btn" data-action="freezeTime"><i class="fas fa-clock"></i><span>หยุดเวลา</span></button></div>
+                            <div class="grid-item"><button class="btn" id="backWeatherButton"  data-action="backFromWeather"><i class="fas fa-arrow-left"></i><span>กลับ</span></button></div>
+                        </div>
+                        <div class="sectiontitle">เปลี่ยนแปลง อากาศ</div>
+                        <br>
+                        <div class="weather-options">
+                            <button class="weather-btn" data-weather="CLEAR"><img src="/html/img/clear-sky.png"><span>โปร่งใส</span></button>
+                            <button class="weather-btn" data-weather="EXTRASUNNY"><img src="/html/img/clear-sky2.png"><span>แดดออก</span></button>
+                            <button class="weather-btn" data-weather="CLOUDS"><img src="/html/img/cloud.png"><span>เมฆ</span></button>
+                            <button class="weather-btn" data-weather="NEUTRAL"><img src="/html/img/rain2.png"><span>ฝนตกมีหมอก</span></button>
+                            <button class="weather-btn" data-weather="FOGGY"><img src="/html/img/nimbostratus.png"><span>หมอก</span></button>
+                            <button class="weather-btn" data-weather="BLIZZARD"><img src="/html/img/blizzard.png"><span>พายุหิมะ</span></button>
+                            <button class="weather-btn" data-weather="HALLOWEEN"><img src="/html/img/witch.png"><span>ฮาโลวีน</span></button>
+                            <button class="weather-btn" data-weather="OVERCAST"><img src="/html/img/clouds.png"><span>เมฆครึ้ม</span></button>
+                            <button class="weather-btn" data-weather="RAIN"><img src="/html/img/rain.png"><span>ฝน</span></button>
+                            <button class="weather-btn" data-weather="SMOG"><img src="/html/img/fog.png"><span>หมอกควัน</span></button>
+                            <button class="weather-btn" data-weather="SNOW"><img src="/html/img/snowflake.png"><span>หิมะ</span></button>
+                            <button class="weather-btn" data-weather="SNOWLIGHT"><img src="/html/img/snow.png"><span>สโนว์ไลท์</span></button>
+                            <button class="weather-btn" data-weather="THUNDER"><img src="/html/img/thunder.png"><span>ฟ้าร้อง</span></button>
+                            <button class="weather-btn" data-weather="XMAS"><img src="/html/img/merry-christmas.png"><span>คริสต์มาส</span></button>
+                        </div>
+                        <br>
+                        <div class="submenu-title">SET Time</div>
+                        <div class="time-display">
+                            <span id="currentGameTime">--:--</span> > <span id="newGameTime">12:00</span>
+                        </div>
+                        <div class="time-slider-container">
+                            <input type="range" min="0" max="23" value="12" class="time-slider" id="timeSlider">
+                            <label for="timeSlider">Time</label>
+                        </div>
+                        <button class="btn confirm" id="confirmTimeButton" data-action="confirmTime">ตกลง</button>
+                    </div>
+                </div>
+                <div id="actions">
+                    <div id="info">
+                        <div class="header">
+                            <span class="playername">MU DEV</span>
+                            <div class="money-info">
+                                <span>Money: <span class="data" data-name="money"></span></span>
+                                <span>Black Money: <span class="data" data-name="blackmoney"></span></span>
+                                <span>Bank: <span class="data" data-name="bank"></span></span>
+                            </div>
+                        </div>
+                        <div class="profile-details">
+                            <div class="left-column">
+                                <div class="info-box">
+                                    <span class="title">Name:</span><span class="data" data-name="name"></span>
+                                    <i class="fa fa-user-circle"></i>
+                                </div>
+                                <div class="info-box">
+                                    <span class="title">Steam ID:</span><span class="data" data-name="license"></span>
+                                    <i class="fab fa-steam"></i>
+                                </div>
+                                <div class="info-box">
+                                    <span class="title">Discord:</span><span class="data" data-name="discord"></span>
+                                    <i class="fab fa-discord"></i>
+                                </div>
+                            </div>
+                            <div class="center-column">
+                                <img src="/html/img/logo.png" alt="Profile Image" class="profile-image">
+                            </div>
+                            <div class="right-column">
+                                <div class="info-box">
+                                    <span class="title">Job:</span><span class="data" data-name="job"></span>
+                                    <select name="jobs" id="jobs"  class="dropdown"></select>
+                                    <i class="fa fa-briefcase"></i>
+                                </div>
+                                <div class="info-box">
+                                    <span class="title">Phone:</span><span class="data" data-name="phone"></span>
+                                    <i class="fas fa-phone"></i>
+                                </div>
+                                <div class="info-box">
+                                    <span class="title">Group:</span>
+                                    <select name="group" id="group" class="dropdown">
+                                        <option value="user">User</option>
+                                        <option value="mod">Moderator</option>
+                                        <option value="admin">Admin</option>
+                                        <option value="superadmin">Superadmin</option>
+                                    </select>
+                                    <i class="fas fa-crown"></i>
+                                </div>                                
+                            </div>
+                        </div>
+                    </div>                    
+                    <div class="sectiontitle">การกระทำ</div>
+                    <div id="grid-container" class="grid-container">
+                        <div><button class="btn kick" data-action="kick"><i class="fas fa-gavel"></i><span> เตะ
+                                </span></button></div>
+                                <div id="kickPopup" class="popupkick">
+                                    <p id="kickPopupText"></p>
+                                    <input type="text" id="kickReasonInput" placeholder="กรุณาใส่เหตุผล">
+                                    <button id="confirmKickButton">ตกลง</button>
+                                    <button id="cancelKickButton">ยกเลิก</button>
+                                </div>
+                        <div><button class="btn" data-action="clearinventory"><i class="fas fa-briefcase"></i>ลบไอเทมทุกชิ้น</button></div>
+                        <div><button class="btn" data-action="clearweawpon"><i class="fas fa-gun"></i>ลบอาวุธทุกชิ้น</button></div>
+                        <div><button class="btn" data-action="bring"><i class="fas fa-people-carry"></i>ดึง</button>
+                        </div>
+                        <div><button class="btn" data-action="goto"><i class="fas fa-map-marked-alt"></i>ไปหา</button>
+                        </div>
+                        <div><button class="btn" data-action="spectate"><i
+                                    class="fas fa-binoculars"></i>Spectate</button></div>
+                        <div><button class="btn" data-action="freeze"><i
+                                    class="fas fa-temperature-low"></i>แช่แข็ง</button></div>
+                        <div><button class="btn" data-action="kill"><i class="fas fa-skull-crossbones"></i>ฆ่า</button>
+                        </div>
+                        <div><button class="btn" data-action="revive"><i
+                                    class="fas fa-briefcase-medical"></i>ชุป</button></div>
+                        <div><button class="btn" data-action="god"><i class="fas fa-bible"></i>อมตะ</button></div>
+                        <div><button class="btn" data-action="inventory"><i
+                                    class="fas fa-box-open"></i>เปิดกระเป๋า</button></div>
+                        <div><button class="btn" data-action="addCash"><i
+                                    class="fas fa-money-check-alt"></i>ให้เงิน</button></div>
+                        <div><button class="btn" data-action="addBlack"><i 
+                                    class="fas fa-money-check-alt"></i>ให้เงินแดง</button></div>
+                        <div><button class="btn" data-action="addBank"><i
+                                    class="fas fa-money-check-alt"></i>ให้เงิน(ธนาคาร)</button></div>
+
+                                    <div id="moneyPopup" class="popupmoney">
+                                        <p id="moneyPopupText"></p>
+                                        <input type="text" id="moneyInput" placeholder="กรุณาใส่จำนวนเงิน">
+                                        <button id="confirmMoneyButton">ตกลง</button>
+                                        <button id="cancelMoneyButton">ยกเลิก</button>
+                                    </div>                                    
+
+                        <div><button class="btn" data-action="giveItem"><i class="fas fa-gift"></i>ให้ไอเทม</button></div>
+                        <div><button class="btn" data-action="giveWeapon"><i class="fas fa-fighter-jet"></i><span> ให้อาวุธ </span></button></div>
+                        <div><button class="btn" data-action="healspecific"><i class="far fa-heart"></i><span> รักษา </span></button></div>
+                        <div><button class="btn" data-action="copyskin"><i class="fas fa-user"></i><span>ก็อปปี้ชุด</span></button></div>
+                    </div>
+                </div>
+                <div id="inputmanager">
+                    <div id="inputwrap">
+                        <div class="inputtitle" id="inputtitle"></div>
+                        <input type="text" id="datainput" class="mtextareas" placeholder="" />
+                        <br />
+                        <div id="buttonwrap">
+                            <button class="button" id="confirminput">ยืนยัน</button>
+                            <button class="button" id="cancelinput">ยกเลิก</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="confirmaction">
+                    <div id="inputwrap">
+                        <div class="inputtitle" id="inputtitle"></div>
+                        <br />
+                        <div id="buttonwrap">
+                            <button class="button" id="confirm">ยืนยัน</button>
+                            <button class="button" id="cancelinput">ยกเลิก</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="weapons">
+                    <div id="itemamount">Give to <span class="playername"></span></div>
+                    <div class="itemsearch1">
+                        <span class="itemsearch2">ค้นหา</span><input type="text" id="weaponsearch"/>
+                    </div>
+                    <div id="item-container">
+                        <div id="weaponlist"></div>
+                        <div id="selected-weapon">
+                            <div id="selected-weapon-list"></div>
+                            <button class="button" id="confirmWeaponButton">ตกลง</button>
+                        </div>
+                    </div>
+                    <button class="buttoncancel" id="cancelWeaponButton">ยกเลิก</button>
+                </div>                
+
+                <div id="items">
+                    <div id="itemamount">Give to <span class="playername"></span></div>
+                    <div class="itemsearch1">
+                        <span class="itemsearch2">ค้นหา</span><input type="text" id="itemsearch"/>
+                    </div>
+                    <div id="item-container">
+                        <div id="itemlist"></div>
+                        <div id="selected-item">
+                            <div id="selected-item-list"></div>
+                            <button class="button" id="confirmButton">ตกลง</button>
+                        </div>
+                    </div>
+                    <button class="buttoncancel" id="cancelItemButton">ยกเลิก</button>
+                </div>                              
+
+                <div id="vehicles">
+                    <div class="hl">เสกรถ</div>
+                    <div id="vehiclelist">
+                    </div>
+                </div>
+                <div id="overlay"></div>
+            </main>
+        </div>
+    </div>
+    <div id="noclipUI">
+        <div class="noclip-item">ปิดใช้งาน <div class="noclipButton" id="noclipKey">PAGEUP</div></div>
+        <div class="noclip-item">ขึ้น <div class="noclipButton">Q</div></div>
+        <div class="noclip-item">ลง <div class="noclipButton">Z</div></div>
+        <div class="noclip-item">ความเร็ว (<span id="noclipSpeedText">0.1</span>) <div class="noclipButton">Shift</div></div>
+    </div>
+    
+</body>
+
+</html>
